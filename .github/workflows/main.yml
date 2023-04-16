@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Print server time
         run: |
-          echo "Server time: $GITHUB_SERVER_TIME"
+          echo "Current date: $(date)"
           
 #   build:
 #     name: Build
