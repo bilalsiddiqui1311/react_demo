@@ -15,7 +15,7 @@ function App() {
         >
           Learn React
         </a>
-        <p>REACT WEB APP SUCCESSFULLY DEPLOYED USING PIPELINE</p>
+        <p>REACT WEB APP SUCCESSFULLY DEPLOYED ITSELF ON SCHEDULED TIME!</p>
       </header>
     </div>
   );
