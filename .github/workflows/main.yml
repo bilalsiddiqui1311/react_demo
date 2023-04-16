@@ -1,54 +1,50 @@
-name: React Deployment On Firebase
+name: React Deployment On Firebase    
 on:
+  schedule:
+    - cron: '19 35 * * *'
   push:
-    branches: [main]      
-jobs:
-  my-job:
+    branches:
+      - main    
+jobs:          
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Print server time
-        run: |
-          echo "Current date: $(date)"
-          
-#   build:
-#     name: Build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@v2.3.2
+      - name: Checkout Repo
+        uses: actions/checkout@v2.3.2
       
-#       - name: Install Dependencies
-#         run: npm install      
+      - name: Install Dependencies
+        run: npm install      
       
-#       - name: Build
-#         env:
-#           CI: false          
-#           #If CI is true, then any warning in the application/code will be treated as error. and eventually it'll fail the p
-#         run: npm run build
+      - name: Build
+        env:
+          CI: false          
+          #If CI is true, then any warning in the application/code will be treated as error. and eventually it'll fail the p
+        run: npm run build
       
-#       - name: Archive Production Artifact
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: build
-#           path: build
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
 
-#   deploy:
-#     name: Deploy
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@v2.3.2
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2.3.2
       
-#       - name: Download Artifact
-#         uses: actions/download-artifact@v2
-#         with:
-#           name: build
-#           path: build
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
       
-#       - name: Deploy to Firebase
-#         uses: w9jds/firebase-action@master
-#         with:
-#           args: deploy --only hosting
-#         env:
-#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
