@@ -1,10 +1,10 @@
 name: React Deployment On Firebase    
 on:
   schedule:
-    - cron: '45 9 * * *'
+    - cron: '45 * * * *'
   push:
     branches:
-      - main    
+      - schedule    
 jobs:          
   build:
     name: Build
