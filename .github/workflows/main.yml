@@ -1,7 +1,7 @@
 name: React Deployment On Firebase    
 on:
   schedule:
-    - cron: '45 * * * *'
+    - cron: '36 23 * * *'
   push:
     branches:
       - schedule    
